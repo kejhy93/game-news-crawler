@@ -2,7 +2,7 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 orbs:
-  discord-orb: tkyshm/discord-orb@0.0.8
+  discord: teka23/discord@0.0.1
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
@@ -24,6 +24,12 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      # Notify discord channel
+      - discord/notify:
+          color: '4383476'
+          mentions: 'everyone'
+          message: This is a custom message notification
+          webhook: https://discord.com/api/webhooks/867053150622711838/-DEG4DhphqPF2jYBPmMC29qxEv6seZYIkhm1TeeoPkRTF8ilmXu-BkwnAIcnljFxx5LM
 
 workflows:
   # Below is the definition of your workflow.
