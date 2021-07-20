@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DummyController {
 
     @GetMapping("/")
-    public void test() {
-
+    public String test() {
+        return "Hello World";
     }
 
 }
