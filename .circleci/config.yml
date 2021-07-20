@@ -27,9 +27,9 @@ jobs:
       # Notify discord channel
       - discord/notify:
           color: '4383476'
-          mentions: 'everyone'
-          message: This is a custom message notification
-          webhook: https://discord.com/api/webhooks/867053150622711838/-DEG4DhphqPF2jYBPmMC29qxEv6seZYIkhm1TeeoPkRTF8ilmXu-BkwnAIcnljFxx5LM
+
+      - discord/status:
+        fail_only: true
 
 workflows:
   # Below is the definition of your workflow.
