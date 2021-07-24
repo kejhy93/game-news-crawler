@@ -30,7 +30,8 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
-            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest
+            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest            
+            docker push hejnaluk/game-news-crawler:latest
       # Notify discord channel
       - discord/notify:
           color: '4383476'
