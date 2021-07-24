@@ -27,7 +27,9 @@ jobs:
           command: mvn test
       - run:
           name: Build Docker image
-          command: docker build -f "Dockerfile" -t hejnalukgame-news-crawler:latest .
+          command: | 
+            echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest
       # Notify discord channel
       - discord/notify:
           color: '4383476'
