@@ -67,7 +67,7 @@
 				<configuration>
 					<image>
 						<env>
-							<BPE_JAVA_TOOL_OPTIONS>-Xmx384m -Xms384m -Xss128k -XX:+UseCompressedOops</BPE_JAVA_TOOL_OPTIONS>
+							<BPE_JAVA_TOOL_OPTIONS>-Xmx384m -Xms384m -Xss128k -XX:MaxMetaspaceSize=69691K -XX:+UseCompressedOops</BPE_JAVA_TOOL_OPTIONS>
 						</env>
 					</image>
 				</configuration>
