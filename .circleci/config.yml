@@ -17,6 +17,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - setup_remote_docker
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
@@ -25,23 +26,17 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest
       # Notify discord channel
       - discord/notify:
           color: '4383476'
       # Notify discord channel
       - discord/status:
           fail_only: true
-
-  publish-latest:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - setup_remote_docker
-      - run:
-          name: Publish Docker Image to Docker Hub
-          command: |
-            echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
-            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest
 
 workflows:
   # Below is the definition of your workflow.
@@ -51,7 +46,6 @@ workflows:
   sample: 
     jobs:
       - build-and-test
-      - publish-latest
       
   heroku_deploy:
      jobs:
