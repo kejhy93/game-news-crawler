@@ -37,7 +37,7 @@ jobs:
             echo "Heroku login"
             heroku container:login
             echo "Heroku push"
-            heroku container:push -a game-news-crawler
+            heroku container:push -a game-news-crawler --recursive
       - heroku/push-docker-image:
           recursive: true
       # Notify discord channel
