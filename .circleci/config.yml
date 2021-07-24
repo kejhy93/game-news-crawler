@@ -18,6 +18,7 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       - setup_remote_docker
+      - heroku/install
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
@@ -30,8 +31,16 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
-            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest            
+            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest      
+            mvn spring-boot:build-image -Dspring-boot.build-image.imageName=game-news-crawler:latest            
             docker push hejnaluk/game-news-crawler:latest
+            
+            echo "Heroku login"
+            docker login --username=_ --password=${HEROKU_API_KEY} registry.heroku.com
+            docker tag hejnaluk/game-news-crawler:latest registry.heroku.com/game-news-crawler/web
+            docker push registry.heroku.com/game-news-crawler/web
+            
+            heroku container:release -a game-news-crawler web
       # Notify discord channel
       - discord/notify:
           color: '4383476'
@@ -48,18 +57,6 @@ workflows:
     jobs:
       - build-and-test
       
-  heroku_deploy:
-     jobs:
-       - build-and-test
-       - heroku/deploy-via-git:
-           requires:
-             - build-and-test # only run deploy-via-git job if the build job has completed
-           filters:
-             branches:
-               only: 
-                master
-                heroku-deployment
-
   nightly:
     triggers:
       - schedule:
