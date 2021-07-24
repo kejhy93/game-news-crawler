@@ -19,10 +19,13 @@ public class DummyController {
     @Autowired
     XmlMapper mapper;
 
+    @Autowired
+    HttpRequestExecutor httpRequestExecutor;
+
     @GetMapping("/")
     public String test() throws IOException {
         URL url = new URL("https://indian-tv.cz/atom.xml");
-        String value = new HttpRequestExecutor().call(url);
+        String value = httpRequestExecutor.call(url);
 
         Feed feed = mapper.readValue(value, Feed.class);
 
