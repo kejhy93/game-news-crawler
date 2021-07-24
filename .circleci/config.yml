@@ -25,6 +25,9 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      - run:
+          name: Build Docker image
+          command: docker build -f "Dockerfile" -t hejnalukgame-news-crawler:latest .
       # Notify discord channel
       - discord/notify:
           color: '4383476'
