@@ -1,8 +1,6 @@
 FROM cimg/openjdk:11.0
 
-ADD . /usr/game-news-crawler
+ADD target /usr/target
 
-EXPOSE 8080
-
-RUN mvn spring-boot:run
+CMD [ "java", "-jar", "/usr/target/game-news-crawler-0.0.1-SNAPSHOT.jar" ] 
 
