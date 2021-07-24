@@ -1,6 +1,7 @@
 package org.hejnaluk.gamenewscrawler.service;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
@@ -11,9 +12,8 @@ import java.net.URL;
 
 public class HttpRequestExecutor {
 
-    @Autowired
-    Logger logger;
-
+    Logger logger = LoggerFactory.getLogger(HttpRequestExecutor.class.getName());
+    
     public String call (URL url) throws IOException {
         logger.info("HttpRequestExecutor::call start");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
