@@ -34,7 +34,9 @@ jobs:
             mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hejnaluk/game-news-crawler:latest            
             docker push hejnaluk/game-news-crawler:latest
             
+            echo "Heroku login"
             heroku container:login
+            echo "Heroku push"
             heroku container:push -a game-news-crawler
       - heroku/push-docker-image:
           recursive: true
