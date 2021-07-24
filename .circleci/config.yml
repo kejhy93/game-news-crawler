@@ -40,7 +40,7 @@ jobs:
             docker tag hejnaluk/game-news-crawler:latest registry.heroku.com/game-news-crawler/web
             docker push registry.heroku.com/game-news-crawler/web
             
-            heroku container:release web
+            heroku container:release -a game-news-crawler web
       # Notify discord channel
       - discord/notify:
           color: '4383476'
