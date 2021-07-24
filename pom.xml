@@ -67,7 +67,7 @@
 				<configuration>
 					<image>
 						<env>
-							<BPE_JAVA_TOOL_OPTIONS>-Xmx124m -Xms124m -Xss136k -XX:MaxMetaspaceSize=39691K -XX:ReservedCodeCacheSize=150M -XX:+UseCompressedOops</BPE_JAVA_TOOL_OPTIONS>
+							<BPE_JAVA_TOOL_OPTIONS>-Xmx124m -Xms124m -Xss136k -XX:MaxMetaspaceSize=39691K -XX:ReservedCodeCacheSize=350M -XX:+UseCompressedOops</BPE_JAVA_TOOL_OPTIONS>
 						</env>
 					</image>
 				</configuration>
