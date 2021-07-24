@@ -32,6 +32,17 @@ jobs:
       - discord/status:
           fail_only: true
 
+  publish-latest:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            docker push hejnaluk/game-news-crawler:latest
+
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
@@ -40,6 +51,7 @@ workflows:
   sample: 
     jobs:
       - build-and-test
+      - publish-latest
       
   heroku_deploy:
      jobs:
