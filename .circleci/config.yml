@@ -36,9 +36,9 @@ jobs:
             docker push hejnaluk/game-news-crawler:latest
             
             echo "Heroku login"
-            heroku container:login
-            echo "Heroku push"
-            heroku container:push game-news-crawler -a game-news-crawler --recursive
+            docker login --username=_ --password=$(HEROKU_API_KEY) registry.heroku.com
+            docker tag hejnaluk/game-news-crawler:latest registry.heroku.com/game-news-crawler/web
+            docker push registry.heroku.com/game-news-crawler/web
       - heroku/push-docker-image:
           recursive: true
       # Notify discord channel
