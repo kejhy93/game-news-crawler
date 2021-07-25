@@ -22,7 +22,7 @@ class RedisConfiguration {
                 .readFrom(REPLICA_PREFERRED)
                 .build();
 
-        RedisStandaloneConfiguration serverConfig = new RedisStandaloneConfiguration(REDIS_URL, 6379);
+        RedisStandaloneConfiguration serverConfig = new RedisStandaloneConfiguration(REDIS_URL);
 
         return new LettuceConnectionFactory(serverConfig, clientConfig);
     }
