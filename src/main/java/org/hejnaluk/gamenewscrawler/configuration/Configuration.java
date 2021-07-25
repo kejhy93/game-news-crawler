@@ -3,6 +3,8 @@ package org.hejnaluk.gamenewscrawler.configuration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.hejnaluk.gamenewscrawler.service.HttpRequestExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 
 @org.springframework.context.annotation.Configuration
