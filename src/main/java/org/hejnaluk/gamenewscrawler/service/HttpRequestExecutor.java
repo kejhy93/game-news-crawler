@@ -35,7 +35,7 @@ public class HttpRequestExecutor {
 
         String receivedData = content.toString();
 
-        logger.info("content=\n" + receivedData);
+//        logger.info("content=\n" + receivedData);
 
         return receivedData;
     }
