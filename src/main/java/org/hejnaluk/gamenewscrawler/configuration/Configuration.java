@@ -3,12 +3,16 @@ package org.hejnaluk.gamenewscrawler.configuration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.hejnaluk.gamenewscrawler.service.HttpRequestExecutor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
+
+    @Value("${REDIS_URL}")
+    String REDIS_URL;
 
     @Bean
     public XmlMapper xmlMapperBean() {
@@ -27,4 +31,8 @@ public class Configuration {
         return httpRequestExecutor;
     }
 
+    @Bean
+    public LettuceConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(REDIS_URL, 6379));
+    }
 }
