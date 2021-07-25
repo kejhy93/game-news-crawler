@@ -67,7 +67,7 @@
 				<configuration>
 					<image>
 						<env>
-							<BPE_JAVA_TOOL_OPTIONS>-Xmx300m -Xss512k -XX:+UseContainerSupport</BPE_JAVA_TOOL_OPTIONS>
+							<BPE_JAVA_TOOL_OPTIONS>-Xss512k -XX:+UseContainerSupport -XX:+UseCompressedOops -XX:+PrintGCDetails -XX:+PrintHeapAtGC -XX:+PrintGCDateStamps</BPE_JAVA_TOOL_OPTIONS>
 						</env>
 					</image>
 				</configuration>
