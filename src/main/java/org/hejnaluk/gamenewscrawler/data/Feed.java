@@ -8,13 +8,13 @@ import java.util.List;
 public class Feed {
     @JacksonXmlProperty(localName = "entry")
     @JacksonXmlElementWrapper(useWrapping = false)
-    List<Entry> entries;
+    List<EntryXml> entries;
 
-    public List<Entry> getEntries() {
+    public List<EntryXml> getEntries() {
         return entries;
     }
 
-    public void setEntries(List<Entry> entries) {
+    public void setEntries(List<EntryXml> entries) {
         this.entries = entries;
     }
 }
