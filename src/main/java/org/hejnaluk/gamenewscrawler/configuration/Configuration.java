@@ -1,18 +1,17 @@
 package org.hejnaluk.gamenewscrawler.configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.hejnaluk.gamenewscrawler.service.HttpRequestExecutor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
-
-    @Value("${REDIS_URL}")
-    String REDIS_URL;
 
     @Bean
     public XmlMapper xmlMapperBean() {
@@ -25,14 +24,20 @@ public class Configuration {
     }
 
     @Bean
+    @Primary
+    public ObjectMapper objectMapperBean() {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        return objectMapper;
+    }
+
+    @Bean
     public HttpRequestExecutor httpRequestExecutorBean() {
         HttpRequestExecutor httpRequestExecutor = new HttpRequestExecutor();
 
         return httpRequestExecutor;
-    }
-
-    @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(REDIS_URL, 6379));
     }
 }
