@@ -20,11 +20,11 @@ public class HttpRequestExecutor {
         con.setRequestMethod("GET");
 
         logger.info("HttpRequestExecutor::call url");
-
+        StringBuffer content = new StringBuffer();
+        
         try (   InputStreamReader reader = new InputStreamReader(con.getInputStream(), "UTF-8");
                 BufferedReader in = new BufferedReader(reader)) {
             String inputLine;
-            StringBuffer content = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
             }
