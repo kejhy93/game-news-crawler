@@ -21,15 +21,14 @@ public class HttpRequestExecutor {
 
         logger.info("HttpRequestExecutor::call url");
 
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
+        try (   InputStreamReader reader = new InputStreamReader(con.getInputStream(), "UTF-8");
+                BufferedReader in = new BufferedReader(reader)) {
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
         }
-        in.close();
-        con.disconnect();
 
         logger.info("HttpRequestExecutor::call data received");
 
